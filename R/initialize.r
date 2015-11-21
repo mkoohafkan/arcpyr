@@ -6,8 +6,8 @@
 #'
 #' @param PYTHON_EXE Path to python executable. If missing, will search for the
 #'   default Windows path to the ArcGIS Python distribution.
-#' @param quietly Logical: Suppress warning when \code{PYTHON_EXE} is not 
-#'   specified.
+#' @param quietly Logical: Suppress messages and warnings.
+#' @return No return value.
 #' @details The following arcpy calls are available:
 #'   \itemize{
 #'     \item \strong{Environment Settings}
@@ -27,6 +27,11 @@
 #'     \item Clip_analysis 
 #'     \item Select_analysis
 #'   }
+#'
+#' @examples
+#' \dontrun{
+#' arcpy.initialize("C:/Python27/ArcGIS10.3/python.exe")
+#' }
 #'
 #' @export
 arcpy.initialize <- function(PYTHON_EXE, quietly = FALSE){

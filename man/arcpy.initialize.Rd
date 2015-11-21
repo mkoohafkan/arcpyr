@@ -4,7 +4,16 @@
 \alias{arcpy.initialize}
 \title{Initialize the arcypy interface}
 \usage{
-arcpy.initialize(PYTHON_EXE)
+arcpy.initialize(PYTHON_EXE, quietly = FALSE)
+}
+\arguments{
+\item{PYTHON_EXE}{Path to python executable. If missing, will search for the
+default Windows path to the ArcGIS Python distribution.}
+
+\item{quietly}{Logical: Suppress messages and warnings.}
+}
+\value{
+No return value.
 }
 \description{
 Initialize the R-arcypy interface by opening a connection to the
@@ -31,5 +40,10 @@ The following arcpy calls are available:
     \item Clip_analysis
     \item Select_analysis
   }
+}
+\examples{
+\dontrun{
+arcpy.initialize("C:/Python27/ArcGIS10.3/python.exe")
+}
 }
 
