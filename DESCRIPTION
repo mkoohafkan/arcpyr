@@ -1,0 +1,19 @@
+Package: arcpyr
+Type: Package
+Title: R Interface for Arcpy
+Version: 0.0.1.9000
+Date: 2015-11-17
+Author: Michael C Koohafkan [aut, cre]
+Maintainer: Michael C Koohafkan <michael.koohafkan@gmail.com>
+Description: An R interface for Arcypy that relies heavily on the 
+    PythonInR package. Provides convenience functions for accessing ArcGIS 
+    tools through Arcpy. Make sure that PythonInR is installed and configured 
+    before installing this package.
+URL: https://github.com/mkoohafkan/arcpyr 
+BugReports: https://github.com/mkoohafkan/arcpyr/issues 
+License: GPL (>= 3)
+Depends: R (>= 3.1.2)
+Imports: PythonInR (>= 0.1-2)
+Suggests: raster, rgdal, knitr
+LazyData: true
+VignetteBuilder: knitr
