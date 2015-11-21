@@ -55,6 +55,9 @@ arcpy.initialize <- function(PYTHON_EXE, quietly = FALSE){
   else 
     PythonInR::pyConnect(PYTHON_EXE)
   with(parent.frame(), {
+    ################################################################
+    ###                    ARCPY INTERFACES                      ###
+    ################################################################
     PythonInR::pyExec("import arcpy")
     # environment
     env.workspace = function(path){
