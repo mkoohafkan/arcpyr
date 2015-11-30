@@ -22,11 +22,14 @@ Initialize the R-arcypy interface by opening a connection to the
 }
 \details{
 The following arcpy calls are available:
+\subsection{Environment Settings}{
   \itemize{
-    \item \strong{Environment Settings}
     \item env.workspace
     \item env.overwriteOutput
-    \item \strong{Listing}
+  }
+}
+\subsection{Listing}{
+  \itemize{
     \item ListDatasets
     \item ListFeatureClasses
     \item ListFields
@@ -36,14 +39,31 @@ The following arcpy calls are available:
     \item ListTables
     \item ListVersions
     \item ListWorkspaces
-    \item \strong{Extraction}
+  }
+}
+\subsection{Extraction}{
+  \itemize{
     \item Clip_analysis
     \item Select_analysis
   }
 }
+\subsection{Management}{
+  \itemize{
+    \item JoinField_management
+  }
+}
+\subsection{Conversion}{
+  \itemize{
+    \item RasterToPolygon_conversion
+  }
+}
+}
 \examples{
 \dontrun{
 arcpy.initialize("C:/Python27/ArcGIS10.3/python.exe")
+env.workspace("C:/test.gdb")
+env.overwriteOutput(TRUE)
+Clip_analysis("feature1", "feature2")
 }
 }
 
