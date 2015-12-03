@@ -132,7 +132,8 @@ arcpy.initialize <- function(PYTHON_EXE, quietly = FALSE){
     PythonInR::pyImport(management.funs, from = "arcpy")
     # conversion
     conversion.funs = c(
-      "RasterToPolygon_conversion"
+      "RasterToPolygon_conversion",
+      "TableToTable_conversion"
     )
     PythonInR::pyImport(conversion.funs, from = "arcpy")
   })
