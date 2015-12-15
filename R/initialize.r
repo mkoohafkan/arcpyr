@@ -28,10 +28,11 @@
 #'     \item ListWorkspaces
 #'   }
 #' }
-#' \subsection{Extraction}{
+#' \subsection{Analysis}{
 #'   \itemize{
 #'     \item Clip_analysis 
 #'     \item Select_analysis
+#'     \item Intersect_analysis
 #'   }
 #' }
 #' \subsection{Management}{
@@ -39,11 +40,18 @@
 #'     \item AddJoin_management
 #'     \item RemoveJoin_management
 #'     \item JoinField_management
+#'     \item Dissolve_management
+#'     \item Delete_management
+#'     \item MakeFeatureLayer_management
+#'     \item SelectLayerByAttribute_management
+#'     \item SelectLayerByLocation_management
+#'     \item AlterField_management
 #'   }
 #' }
 #' \subsection{Conversion}{
 #'   \itemize{
 #'     \item RasterToPolygon_conversion
+#'     \item TableToTable_conversion
 #'   }
 #' }
 #'
@@ -116,18 +124,24 @@ arcpy.initialize <- function(PYTHON_EXE, quietly = FALSE){
     )
     PythonInR::pyImport(listing.funs, from = "arcpy")
     # extraction
-    extraction.funs = c(
+    analysis.funs = c(
       "Clip_analysis", 
-      "Select_analysis"
+      "Select_analysis",
+      "Intersect_analysis"
     )
-    PythonInR::pyImport(extraction.funs, from = "arcpy")
+    PythonInR::pyImport(analysis.funs, from = "arcpy")
     # management
     management.funs = c(
       "Delete_management",
       "CopyRows_management",
       "AddJoin_management",
       "RemoveJoin_management",
-      "JoinField_management"
+      "JoinField_management",
+      "Dissolve_management",
+      "MakeFeatureLayer_management",
+      "SelectLayerByAttribute_management",
+      "SelectLayerByLocation_management",
+      "AlterField_management"
     )
     PythonInR::pyImport(management.funs, from = "arcpy")
     # conversion
