@@ -47,6 +47,9 @@
 #'     \item SelectLayerByLocation_management
 #'     \item AlterField_management
 #'     \item CopyFeatures_management
+#'     \item AddField_management
+#'     \item CalculateField_management
+#'     \item DeleteField_management
 #'   }
 #' }
 #' \subsection{Conversion}{
@@ -143,7 +146,10 @@ arcpy.initialize <- function(PYTHON_EXE, quietly = FALSE){
       "SelectLayerByAttribute_management",
       "SelectLayerByLocation_management",
       "AlterField_management",
-      "CopyFeatures_management"
+      "CopyFeatures_management",
+      "AddField_management",
+      "CalculateField_management",
+      "DeleteField_management"
     )
     PythonInR::pyImport(management.funs, from = "arcpy")
     # conversion

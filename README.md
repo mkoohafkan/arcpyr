@@ -3,7 +3,7 @@ arcpyr
 
 [![Build Status](https://travis-ci.org/mkoohafkan/arcpyr.svg)](https://travis-ci.org/mkoohafkan/arcpyr)
 
-An R interface for `arcpy`. Relies on the Python interface provided by 
+An R interface for `arcpy`. Relies on the virtual Python environment provided by 
 `PythonInR` to generate function interfaces for a selection of `arcpy` functions
 and objects. The list of functions is growing, and contributing is easy! Look 
 at `initialize.r` to see how to add other tools using either `pyImport` or 
