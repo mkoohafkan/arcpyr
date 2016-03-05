@@ -176,8 +176,11 @@ arcpy.initialize <- function(PYTHON_EXE, quietly = FALSE){
 #'
 #' @examples
 #' \dontrun{
+#' inrasts = list(wse = "scratch.gdb/wse", elev = "scratch.gdb/wse")
+#' outrast = list(depth = "scratch.gdb/depth")
+#' expr = list("depth = wse - elev")
 #' sa.initialize()
-#' RasterCalculator(expr, "outrast")
+#' RasterCalculator(expr, inrasts, outrast)
 #' }
 #'
 #' @export
@@ -195,6 +198,7 @@ sa.initialize = function(){
       invisible(NULL)
     }
     sa.funs = c(
+      "ZonalStatisticsAsTable",
       "Raster",
       "Con",
       "Pick",
