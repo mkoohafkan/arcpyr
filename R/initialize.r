@@ -33,6 +33,7 @@
 #'     \item Clip_analysis 
 #'     \item Select_analysis
 #'     \item Intersect_analysis
+#'     \item SpatialJoin_analysis
 #'   }
 #' }
 #' \subsection{Management}{
@@ -50,6 +51,7 @@
 #'     \item AddField_management
 #'     \item CalculateField_management
 #'     \item DeleteField_management
+#'     \item FeatureToPoint_management
 #'   }
 #' }
 #' \subsection{Conversion}{
@@ -127,11 +129,12 @@ arcpy.initialize <- function(PYTHON_EXE, quietly = FALSE){
       "ListWorkspaces"
     )
     PythonInR::pyImport(listing.funs, from = "arcpy")
-    # extraction
+    # analysis
     analysis.funs = c(
       "Clip_analysis", 
       "Select_analysis",
-      "Intersect_analysis"
+      "Intersect_analysis",
+      "SpatialJoin_analysis"
     )
     PythonInR::pyImport(analysis.funs, from = "arcpy")
     # management
@@ -149,7 +152,8 @@ arcpy.initialize <- function(PYTHON_EXE, quietly = FALSE){
       "CopyFeatures_management",
       "AddField_management",
       "CalculateField_management",
-      "DeleteField_management"
+      "DeleteField_management",
+      "FeatureToPoint_management"
     )
     PythonInR::pyImport(management.funs, from = "arcpy")
     # conversion
