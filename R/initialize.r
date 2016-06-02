@@ -34,6 +34,7 @@
 #'     \item Select_analysis
 #'     \item Intersect_analysis
 #'     \item SpatialJoin_analysis
+#'     \item Union_analysis
 #'   }
 #' }
 #' \subsection{Management}{
@@ -116,7 +117,7 @@ arcpy.initialize <- function(PYTHON_EXE, quietly = FALSE){
       }
         PythonInR::pyGet("arcpy.env.overwriteOutput")
     }
-    # listing data
+    # listing
     listing.funs = c(
       "ListDatasets", 
       "ListFeatureClasses", 
@@ -128,15 +129,14 @@ arcpy.initialize <- function(PYTHON_EXE, quietly = FALSE){
       "ListVersions", 
       "ListWorkspaces"
     )
-    PythonInR::pyImport(listing.funs, from = "arcpy")
     # analysis
     analysis.funs = c(
       "Clip_analysis", 
       "Select_analysis",
       "Intersect_analysis",
-      "SpatialJoin_analysis"
+      "SpatialJoin_analysis",
+      "Union_analysis"
     )
-    PythonInR::pyImport(analysis.funs, from = "arcpy")
     # management
     management.funs = c(
       "Delete_management",
@@ -155,13 +155,25 @@ arcpy.initialize <- function(PYTHON_EXE, quietly = FALSE){
       "DeleteField_management",
       "FeatureToPoint_management"
     )
-    PythonInR::pyImport(management.funs, from = "arcpy")
     # conversion
     conversion.funs = c(
       "RasterToPolygon_conversion",
       "TableToTable_conversion"
     )
-    PythonInR::pyImport(conversion.funs, from = "arcpy")
+    # import funs and catch errors
+    all.funs = c(listing.funs, analysis.funs, management.funs, 
+      conversion.funs)
+    errlist = setNames(rep(FALSE, length(all.funs)), all.funs)
+    for(fun in all.funs){
+      res = tail(capture.output(class(try(PythonInR::pyImport(fun, 
+        from = "arcpy"), silent = TRUE))), 1)
+      if(grepl("try-error", res))
+        errlist[[fun]] = TRUE
+    }
+    names(errlist) = NULL
+    if(any(errlist))
+      warning("The following arcpy functions could not be imported: ", 
+      paste(all.funs[errlist], collapse = ", "), call. = FALSE)
   })
   invisible(NULL)
 }
@@ -240,8 +252,19 @@ sa.initialize = function(){
       "IsNull",
       "Over",
       "Test"
-    )    
-    PythonInR::pyImport(sa.funs, from = "arcpy.sa")
+    )
+    # import funs and catch errors
+    errlist = setNames(rep(FALSE, length(sa.funs)), sa.funs)
+    for(fun in sa.funs){
+      res = tail(capture.output(class(try(PythonInR::pyImport(fun, 
+        from = "arcpy.sa"), silent = TRUE))), 1)
+      if(grepl("try-error", res))
+        errlist[[fun]] = TRUE
+    }
+    names(errlist) = NULL
+    if(any(errlist))
+      warning("The following arcpy.sa functions could not be imported: ", 
+      paste(sa.funs[errlist], collapse = ", "), call. = FALSE)
   }) 
   invisible(NULL)
 }
