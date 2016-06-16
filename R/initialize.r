@@ -35,6 +35,7 @@
 #'     \item Intersect_analysis
 #'     \item SpatialJoin_analysis
 #'     \item Union_analysis
+#'     \item Identity_analysis
 #'   }
 #' }
 #' \subsection{Management}{
@@ -53,6 +54,8 @@
 #'     \item CalculateField_management
 #'     \item DeleteField_management
 #'     \item FeatureToPoint_management
+#'     \item Merge_management
+#'     \item Append_management
 #'   }
 #' }
 #' \subsection{Conversion}{
@@ -135,7 +138,8 @@ arcpy.initialize <- function(PYTHON_EXE, quietly = FALSE){
       "Select_analysis",
       "Intersect_analysis",
       "SpatialJoin_analysis",
-      "Union_analysis"
+      "Union_analysis",
+      "Identity_analysis"
     )
     # management
     management.funs = c(
@@ -153,7 +157,9 @@ arcpy.initialize <- function(PYTHON_EXE, quietly = FALSE){
       "AddField_management",
       "CalculateField_management",
       "DeleteField_management",
-      "FeatureToPoint_management"
+      "FeatureToPoint_management",
+      "Merge_management",
+      "Append_management"
     )
     # conversion
     conversion.funs = c(
