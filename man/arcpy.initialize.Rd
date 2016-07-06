@@ -47,6 +47,8 @@ The following arcpy calls are available:
     \item Select_analysis
     \item Intersect_analysis
     \item SpatialJoin_analysis
+    \item Union_analysis
+    \item Identity_analysis
   }
 }
 \subsection{Management}{
@@ -65,6 +67,8 @@ The following arcpy calls are available:
     \item CalculateField_management
     \item DeleteField_management
     \item FeatureToPoint_management
+    \item Merge_management
+    \item Append_management
   }
 }
 \subsection{Conversion}{
