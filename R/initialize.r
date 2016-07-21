@@ -56,6 +56,7 @@
 #'     \item FeatureToPoint_management
 #'     \item Merge_management
 #'     \item Append_management
+#'     \item CreateFileGDB_management
 #'   }
 #' }
 #' \subsection{Conversion}{
@@ -159,7 +160,8 @@ arcpy.initialize <- function(PYTHON_EXE, quietly = FALSE){
       "DeleteField_management",
       "FeatureToPoint_management",
       "Merge_management",
-      "Append_management"
+      "Append_management",
+      "CreateFileGDB_management"
     )
     # conversion
     conversion.funs = c(

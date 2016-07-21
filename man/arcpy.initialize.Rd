@@ -69,6 +69,7 @@ The following arcpy calls are available:
     \item FeatureToPoint_management
     \item Merge_management
     \item Append_management
+    \item CreateFileGDB_management
   }
 }
 \subsection{Conversion}{
