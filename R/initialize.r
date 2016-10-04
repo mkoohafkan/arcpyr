@@ -68,10 +68,22 @@
 #'
 #' @examples
 #' \dontrun{
-#' arcpy.initialize("C:/Python27/ArcGIS10.3/python.exe")
+#' # using the ArcGIS Desktop 10.x Python environment
+#' arcpy.initialize("C:/Python27/ArcGIS10.x/python.exe")
 #' env.workspace("C:/test.gdb")
 #' env.overwriteOutput(TRUE)
 #' Clip_analysis("feature1", "feature2")
+#'
+#' # using the ArcGIS Pro (>= 1.3) Python environment
+#' envpath = "C:/Program Files/ArcGIS/Pro/bin/Python/envs/arcgispro-py3"
+#' PythonInR:::pyConnectWinDll(
+#'   dllName = "python34.dll", 
+#'   pyArch = "64bit", 
+#'   majorVersion = 3, 
+#'   dllDir = envpath, 
+#'   pythonHome = envpath
+#' )
+#' arcpy.initialize(quietly = TRUE)
 #' }
 #'
 #' @export
@@ -79,27 +91,35 @@ arcpy.initialize <- function(PYTHON_EXE, quietly = FALSE){
   oldwarn = options("warn")$warn
   options(warn = 1)
   on.exit(options(warn = oldwarn))
-  if(missing(PYTHON_EXE)){
-    if(!quietly) 
-      warning("PYTHON_EXE not defined. Searching default filepath based on R architecture.")
-    if(.Platform$r_arch == "x64")
-      PYTHON_EXE = file.path("C:/Python27", 
+  if(PythonInR::pyIsConnected()){
+    if(!quietly)
+    warning("R is already connected Python.")
+  } else {
+    if(missing(PYTHON_EXE)){
+      if(!quietly) 
+        warning("PYTHON_EXE not defined. Searching default filepath based on R architecture.")
+      if(.Platform$r_arch == "x64")
+        PYTHON_EXE = file.path("C:/Python27", 
         dir("C:/Python27")[grepl("ArcGIS.*x64",dir("C:/Python27"))],
         "python.exe")
     else
       PYTHON_EXE = file.path("C:/Python27", 
-        dir("C:/Python27")[grepl("ArcGIS.*",dir("C:/Python27")) & 
-          !(grepl("ArcGIS.*x64", dir("C:/Python27")))],
-        "python.exe")
+      dir("C:/Python27")[grepl("ArcGIS.*",dir("C:/Python27")) & 
+        !(grepl("ArcGIS.*x64", dir("C:/Python27")))],
+      "python.exe")
+    }
+    if(length(PYTHON_EXE) > 1)
+      stop("Multiple python installations dectected. Please manually specify the Python path.")
+    if(length(PYTHON_EXE) < 1)
+      stop("Could not find python.exe")
+    if(!file.exists(PYTHON_EXE))
+      stop("Could not find python.exe")
+    if(quietly) 
+      suppressPackageStartupMessages(PythonInR::pyConnect(PYTHON_EXE))
+    else 
+      PythonInR::pyConnect(PYTHON_EXE)
   }
-  if(length(PYTHON_EXE) < 1)
-    stop("Could not find python.exe")
-  if(!file.exists(PYTHON_EXE))
-    stop("Could not find python.exe")
-  if(quietly) 
-    suppressPackageStartupMessages(PythonInR::pyConnect(PYTHON_EXE))
-  else 
-    PythonInR::pyConnect(PYTHON_EXE)
+  flush.console()
   with(parent.frame(), {
     ################################################################
     ###                    ARCPY INTERFACES                      ###

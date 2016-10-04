@@ -81,10 +81,22 @@ The following arcpy calls are available:
 }
 \examples{
 \dontrun{
-arcpy.initialize("C:/Python27/ArcGIS10.3/python.exe")
+# using the ArcGIS Desktop 10.x Python environment
+arcpy.initialize("C:/Python27/ArcGIS10.x/python.exe")
 env.workspace("C:/test.gdb")
 env.overwriteOutput(TRUE)
 Clip_analysis("feature1", "feature2")
+
+# using the ArcGIS Pro (>= 1.3) Python environment
+envpath = "C:/Program Files/ArcGIS/Pro/bin/Python/envs/arcgispro-py3"
+PythonInR:::pyConnectWinDll(
+  dllName = "python34.dll", 
+  pyArch = "64bit", 
+  majorVersion = 3, 
+  dllDir = envpath, 
+  pythonHome = envpath
+)
+arcpy.initialize(quietly = TRUE)
 }
 
 }
