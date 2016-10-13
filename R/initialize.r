@@ -36,6 +36,7 @@
 #'     \item SpatialJoin_analysis
 #'     \item Union_analysis
 #'     \item Identity_analysis
+#'     \item Erase_analysis 
 #'   }
 #' }
 #' \subsection{Management}{
@@ -160,7 +161,8 @@ arcpy.initialize <- function(PYTHON_EXE, quietly = FALSE){
       "Intersect_analysis",
       "SpatialJoin_analysis",
       "Union_analysis",
-      "Identity_analysis"
+      "Identity_analysis",
+      "Erase_analysis"
     )
     # management
     management.funs = c(
