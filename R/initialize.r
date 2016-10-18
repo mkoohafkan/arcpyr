@@ -58,6 +58,7 @@
 #'     \item Merge_management
 #'     \item Append_management
 #'     \item CreateFileGDB_management
+#'     \item MultipartToSinglepart_management
 #'   }
 #' }
 #' \subsection{Conversion}{
@@ -183,7 +184,8 @@ arcpy.initialize <- function(PYTHON_EXE, quietly = FALSE){
       "FeatureToPoint_management",
       "Merge_management",
       "Append_management",
-      "CreateFileGDB_management"
+      "CreateFileGDB_management",
+      "MultipartToSinglepart_management"
     )
     # conversion
     conversion.funs = c(
