@@ -20,12 +20,21 @@ RasterCalculator = function(expressions, inrasters = list(), outrasters = list()
   invisible(NULL)
 }
 
-envfun = function(field){
-  function(value){
-    if(!missing(value))
-      PythonInR::pyExec(paste0('arcpy.env.', field, ' = "', value, '"'))
-    PythonInR::pyGet(paste0("arcpy.env.", field))
+
+envfun = function(value){
+  field = tail(unlist(
+    strsplit(deparse(match.call()), split = "$", fixed = TRUE)), 1)
+  field = head(unlist(strsplit(field, "(", fixed = TRUE)), 1)
+  if(!missing(value)){
+    if(is.logical(value)){
+      value = gsub("TRUE", "True", value)
+      value = gsub("FALSE", "False", value)
+    } else if(is.character(value)){
+      value = paste0("'", value, "'")
+    }
+    PythonInR::pyExec(paste0('arcpy.env.', field, ' = ', value))
   }
+  PythonInR::pyGet(paste0("arcpy.env.", field))
 }
 
 get_funs = function(module, predicate = "inspect.isfunction"){
@@ -177,7 +186,7 @@ arcpy_env = function(function.list = NULL){
   notfuns = get_funs("arcpy.env", "inspect.ismethod")
   env.funs = env.funs[!(env.funs %in% notfuns)]
   for(f in env.funs[!grepl("_", env.funs)])
-  assign(f, structure(envfun(f), class = "pyFunction"), pos = arcpyr.env)
+  assign(f, envfun, pos = arcpyr.env)
   # attach env to arcpy environment
   assign("env", arcpyr.env, pos = arcpyr)
   arcpyr
