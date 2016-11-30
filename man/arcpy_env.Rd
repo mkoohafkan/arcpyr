@@ -23,7 +23,7 @@ ls(arcpy)
 
 arcpy$Delete_management(path_to_file)
 
-arcpy = arcpy_env(list(Delete_management, Clip_anaylsis))
+arcpy = arcpy_env(list("Delete_management", "Clip_anaylsis"))
 ls(arcpy)
 }
 

@@ -3,6 +3,7 @@
 \name{attach_module}
 \alias{attach_arc}
 \alias{attach_ba}
+\alias{attach_da}
 \alias{attach_ddd}
 \alias{attach_fabric}
 \alias{attach_ga}
@@ -29,6 +30,8 @@ attach_ddd(envir, function.list = NULL)
 attach_ta(envir, function.list = NULL)
 
 attach_ba(envir, function.list = NULL)
+
+attach_da(envir, function.list = NULL)
 
 attach_mp(envir, function.list = NULL)
 
@@ -75,6 +78,8 @@ Technically, any Python module can be attached.
 \item \code{attach_ta}: ArcGIS Tracking Analyst module \code{arcpy.ta}.
 
 \item \code{attach_ba}: Attach the ArcGIS Business Analyst module \code{arcpy.ba}.
+
+\item \code{attach_da}: Attach the ArcGIS Data Access module \code{arcpy.da}.
 
 \item \code{attach_mp}: Attach the ArcGIS Pro Mapping module \code{arcpy.mp}.
 

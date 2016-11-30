@@ -20,7 +20,8 @@ RasterCalculator = function(expressions, inrasters = list(), outrasters = list()
   invisible(NULL)
 }
 
-
+#' @importFrom utils head
+#' @importFrom utils tail
 envfun = function(value){
   field = tail(unlist(
     strsplit(deparse(match.call()), split = "$", fixed = TRUE)), 1)
@@ -172,7 +173,7 @@ connect_ArcPython = function(python_folder, Pro = FALSE, quietly = TRUE){
 #'
 #' arcpy$Delete_management(path_to_file)
 #'
-#' arcpy = arcpy_env(list(Delete_management, Clip_anaylsis))
+#' arcpy = arcpy_env(list("Delete_management", "Clip_anaylsis"))
 #' ls(arcpy)
 #' }
 #'
