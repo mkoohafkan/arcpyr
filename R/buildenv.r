@@ -269,6 +269,11 @@ attach_ta = function(envir, function.list = NULL)
 attach_ba = function(envir, function.list = NULL)
   attach_module(envir, "arcpy.ba", function.list, "Business")
 
+#' @describeIn attach_module Attach the ArcGIS Data Import module \code{arcpy.da}.
+#' @export
+attach_da = function(envir, function.list = NULL)
+  attach_module(envir, "arcpy.da", function.list)
+
 #' @describeIn attach_module Attach the ArcGIS Pro Mapping module \code{arcpy.mp}. 
 #' @export
 attach_mp = function(envir, function.list = NULL)
