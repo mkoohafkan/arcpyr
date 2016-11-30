@@ -41,8 +41,11 @@ get_funs = function(module, predicate = "inspect.isfunction"){
   PythonInR::pyExec("import inspect")
   tv = gsub("\\.", "", paste0("objlist", predicate, module))
   PythonInR::pyExec(paste0(tv, "= [i[0] for i in inspect.getmembers(", 
-    module, ",",  predicate, ")]"))
-  res = PythonInR::pyGet(tv)
+    module, ",", predicate, ")]"))
+  if (PythonInR::pyGet(sprintf("len(%s)", tv)) < 1)
+    res = list()
+  else
+    res = PythonInR::pyGet(tv)
   PythonInR::pyExec(paste("del", tv))
   res
 }
@@ -269,7 +272,7 @@ attach_ta = function(envir, function.list = NULL)
 attach_ba = function(envir, function.list = NULL)
   attach_module(envir, "arcpy.ba", function.list, "Business")
 
-#' @describeIn attach_module Attach the ArcGIS Data Import module \code{arcpy.da}.
+#' @describeIn attach_module Attach the ArcGIS Data Access module \code{arcpy.da}.
 #' @export
 attach_da = function(envir, function.list = NULL)
   attach_module(envir, "arcpy.da", function.list)
