@@ -1,3 +1,11 @@
 ^\.travis\.yml$
 LICENSE
 README.md
+.gitignore
+.rhistory
+.gitattribute
+.vs
+.git
+arcpyr.rproj
+arcpyr.rxproj
+arcpyr.sln
