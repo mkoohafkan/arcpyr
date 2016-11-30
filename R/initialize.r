@@ -59,6 +59,7 @@
 #'     \item Append_management
 #'     \item CreateFileGDB_management
 #'     \item MultipartToSinglepart_management
+#'     \item Resample_management
 #'   }
 #' }
 #' \subsection{Conversion}{
@@ -185,12 +186,14 @@ arcpy.initialize <- function(PYTHON_EXE, quietly = FALSE){
       "Merge_management",
       "Append_management",
       "CreateFileGDB_management",
-      "MultipartToSinglepart_management"
+      "MultipartToSinglepart_management",
+      "Resample_management"
     )
     # conversion
     conversion.funs = c(
       "RasterToPolygon_conversion",
-      "TableToTable_conversion"
+      "TableToTable_conversion",
+      "PolygonToRaster_conversion"
     )
     # import funs and catch errors
     all.funs = c(listing.funs, analysis.funs, management.funs, 
@@ -238,7 +241,7 @@ sa.initialize = function(){
     # RasterCalculator
     RasterCalculator = function(expressions, inrasters = list(), 
       outrasters = list()){
-      load_exprs = paste0(names(inrasters), ' = Raster("', inrasters, '")')
+      load_exprs = paste0(names(inrasters), ' = arcpy.sa.Raster("', inrasters, '")')
       lapply(load_exprs, PythonInR::pyExec)
       lapply(expressions, PythonInR::pyExec)
       save_exprs = paste0(names(outrasters), '.save("', outrasters,'")')
