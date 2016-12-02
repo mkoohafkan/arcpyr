@@ -2,21 +2,25 @@
 % Please edit documentation in R/buildenv.r
 \name{attach_custom}
 \alias{attach_custom}
-\title{Attach Custom Toolbox or Module}
+\title{Attach a Custom Toolbox}
 \usage{
-attach_custom(envir, name, function.list = NULL, input.file)
+attach_custom(envir, name, tool.list, input.file)
 }
 \arguments{
-\item{envir}{The environment to attach the module to.}
+\item{envir}{The environment to attach the toolbox to.}
 
-\item{name}{The name of the toolbox or module to attach.}
+\item{name}{The alias of the toolbox to attach. 
+Underscores \code{_} are not allowed.}
 
-\item{function.list}{A list of functions from the module to expose. 
-If NULL, all functions in the module will be exposed.}
+\item{tool.list}{A list of tools from the toolbox to expose. 
+If NULL, all tools in the toolbox will be exposed.}
 
 \item{input.file}{The input file containing the toolbox.}
 }
 \description{
-Attach a custom toolbox or module to ArcPy.
+Attach a custom toolbox to ArcPy.
+}
+\seealso{
+\code{\link{attach_toolbox}}
 }
 

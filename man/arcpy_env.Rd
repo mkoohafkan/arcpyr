@@ -4,14 +4,18 @@
 \alias{arcpy_env}
 \title{ArcPy Environment}
 \usage{
-arcpy_env(function.list = NULL)
+arcpy_env(tool.list, env.list)
 }
 \arguments{
-\item{function.list}{A list of functions from the module to expose. 
-If NULL, all functions in the module will be exposed.}
+\item{tool.list}{A list of tools from the toolbox to expose. 
+If NULL, all tools in the toolbox will be exposed.}
+
+\item{env.list}{A list of geoprocessing environment settings to 
+expose. If NULL, all environment settings will be exposed.}
 }
 \value{
-An environment object containing arcpy functions.
+An environment object containing arcpy tools and 
+  environment settings.
 }
 \description{
 Create an environment that contains ArcPy function interfaces.
@@ -25,7 +29,13 @@ arcpy$Delete_management(path_to_file)
 
 arcpy = arcpy_env(list("Delete_management", "Clip_anaylsis"))
 ls(arcpy)
+
+ls(arcpy$env)
+arcpy$env$workspace("path_to_workspace")
 }
 
+}
+\seealso{
+\code{\link{connect_ArcPython}}
 }
 

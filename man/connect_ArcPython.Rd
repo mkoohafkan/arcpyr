@@ -38,5 +38,9 @@ connect_ArcPython("C:/Python27/ArcGISx6410.2")
 connect_ArcPython("C:/Program Files/ArcGIS/Pro/bin/Python/envs/arcgispro-py3",
   Pro = TRUE)
 }
+
+}
+\seealso{
+\code{\link{arcpy_env}}
 }
 
