@@ -8,7 +8,7 @@
 #' @name arcpyr-package
 #' @aliases arcpyr
 #' @docType package
-#' @seealso \code{\link{arcpy_env}}, \code{\link{connect_ArcPython}}
+#' @seealso \code{\link{arcpy_env}}, \code{\link{connect_ArcGIS}}
 NULL
 
 
@@ -102,22 +102,22 @@ attach_toolbox = function(envir, name, tool.list) {
 #' @examples
 #' \dontrun{
 #' # Try to autodetect
-#' connect_ArcPython()
+#' connect_ArcGIS()
 #'
 #' # connect to the 32-bit ArcGIS Desktop 10.2 Python environment
-#' connect_ArcPython("C:/Python27/ArcGIS10.2")
+#' connect_ArcGIS("C:/Python27/ArcGIS10.2")
 #'
 #' # connect to the 64-bit ArcGIS Desktop 10.2 Python environment
-#' connect_ArcPython("C:/Python27/ArcGISx6410.2")
+#' connect_ArcGIS("C:/Python27/ArcGISx6410.2")
 #'
 #' # connect to the ArcGIS Pro 1.3 Python environment
-#' connect_ArcPython("C:/Program Files/ArcGIS/Pro/bin/Python/envs/arcgispro-py3",
+#' connect_ArcGIS("C:/Program Files/ArcGIS/Pro/bin/Python/envs/arcgispro-py3",
 #'   Pro = TRUE)
 #' }
 #'
 #' @seealso \code{\link{arcpy_env}}
 #' @export
-connect_ArcPython = function(python_folder, Pro = FALSE, quietly = TRUE) {
+connect_ArcGIS = function(python_folder, Pro = FALSE, quietly = TRUE) {
   # check if Python is already connected
   if (PythonInR::pyIsConnected()) {
     if (!quietly)
@@ -210,7 +210,7 @@ connect_ArcPython = function(python_folder, Pro = FALSE, quietly = TRUE) {
 #' arcpy$env$workspace("path_to_workspace")
 #' }
 #'
-#' @seealso \code{\link{connect_ArcPython}}
+#' @seealso \code{\link{connect_ArcGIS}}
 #' @export
 arcpy_env = function(tool.list, env.list) {
   if (!PythonInR::pyIsConnected())

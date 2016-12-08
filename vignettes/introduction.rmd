@@ -1,0 +1,26 @@
+---
+title: "Introduction to arcpyr"
+output: html_document
+---
+
+```{r include = FALSE}
+library(knitr)
+
+```
+
+
+# Introduction
+
+The `arcpyr` package provides a simple interface to `arcpy` for R 
+users. The interface should be straightforward to those who have
+dabbled with Python and the `arcpy` module, or to those who have
+done some basic work with ArcGIS Model Builder. If you don't fall
+into either of those categories, don't worry! This vignette will 
+show you the basics.
+
+# Connecting to ArcGIS
+
+```{r}
+library(arcpyr)
+connect_ArcGIS()
+```

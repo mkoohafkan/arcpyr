@@ -36,6 +36,6 @@ arcpy$env$workspace("path_to_workspace")
 
 }
 \seealso{
-\code{\link{connect_ArcPython}}
+\code{\link{connect_ArcGIS}}
 }
 

@@ -13,6 +13,6 @@ function interfaces for \code{arcpy} tools and environment settings.
 object. See the vignette to get started.
 }
 \seealso{
-\code{\link{arcpy_env}}, \code{\link{connect_ArcPython}}
+\code{\link{arcpy_env}}, \code{\link{connect_ArcGIS}}
 }
 
