@@ -27,7 +27,10 @@ envfun = function(value) {
     }
     PythonInR::pyExec(paste0('arcpy.env.', field, ' = ', value))
   }
-  PythonInR::pyGet(paste0("arcpy.env.", field))
+  res = PythonInR::pyGet(paste0("arcpy.env.", field))
+  if (is.null(res))
+    res = ""
+  res
 }
 
 #' Checkout Extension
