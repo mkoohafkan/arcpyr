@@ -1,5 +1,5 @@
-  %\VignetteIndexEntry{Introduction}
-  %\VignetteEngine{knitr}
+%\VignetteIndexEntry{Introduction}
+%\VignetteEngine{knitr}
 
 ```{r include = FALSE}
 library(knitr)
@@ -86,8 +86,8 @@ differently from the first method:
 arcpy$management$Delete("path/to/layer")
 ```
 
-This may seem strange but it's completely analogous to the different 
-ways of accessing `arcpy` in Python:
+This may seem strange, but it's completely analogous to the different 
+ways of accessing `arcpy` tools in Python:
 
 ```{python}
 # method 1
@@ -105,7 +105,7 @@ If you want to work with the `arcpy` tools directly in you environment,
 you can use `attach`:
 
 ```{r}
-attach(arcpy_env("Delete_management", NULL))
+attach(arcpy_env())
 Delete_management('path/to/layer')
 env$workspace()
 ```
@@ -113,15 +113,24 @@ env$workspace()
 Which is analagous to 
 
 ```{python}
-from arcpy import Delete_management
+from arcpy import *
+Delete_management('path/to/layer')
+env.workspace
 ```
+
+## Specify ArcGIS environment settings
+
+Setting up the ArcGIS environment with `arcpyr` is only slightly 
+different from Python. In `arcpyr`, environment settings are accessed 
+via function calls
 
 in Python. Note that this can clutter your environment and lead to some naming 
 conflicts, so I don't generally recommend it.
 
 ## Need more?
 
-The `arcpyr` package is great for accessing ArcGIS toolboxes, but it 
-can't handle the object-oriented aspects of `arcpy` and Python. If you
-need things like raster calculations and attribute table reading and 
-modification, check out the `arcpyrextra` package. 
+The `arcpyr` package focuses on providing an interface to ArcGIS 
+toolboxes. It can't handle the object-oriented aspects of 
+`arcpy` and Python, like doing raster calculations reading/writing 
+attribute tables. If you need that sort of functionality, check out the 
+`arcpyrextra` package. 
