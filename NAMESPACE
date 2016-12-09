@@ -3,6 +3,7 @@
 export(arcpy_env)
 export(attach_custom)
 export(attach_toolbox)
+export(checkout_extension)
 export(connect_ArcGIS)
 export(list_gpenv)
 export(list_toolboxes)

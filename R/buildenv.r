@@ -30,6 +30,13 @@ envfun = function(value) {
   PythonInR::pyGet(paste0("arcpy.env.", field))
 }
 
+#' Checkout Extension
+#'
+#' Checkout an ArcGIS extension. 
+#'
+#' @param ext The extension to check out.
+#' 
+#' @export
 checkout_extension = function(ext) {
   if (PythonInR::pyGet(sprintf('arcpy.CheckOutExtension("%s")', ext)) != "CheckedOut")
     stop(sprintf("extension '%s' is not available.", ext), call. = FALSE)
