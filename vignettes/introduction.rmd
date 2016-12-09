@@ -1,15 +1,12 @@
----
-title: "Introduction to arcpyr"
-output: html_document
----
+  %\VignetteIndexEntry{Introduction}
+  %\VignetteEngine{knitr}
 
 ```{r include = FALSE}
 library(knitr)
-
+opts_chunk$set(eval = FALSE)
 ```
 
-
-# Introduction
+# Introduction to arcpyr
 
 The `arcpyr` package provides a simple interface to `arcpy` for R 
 users. The interface should be straightforward to those who have
@@ -18,9 +15,113 @@ done some basic work with ArcGIS Model Builder. If you don't fall
 into either of those categories, don't worry! This vignette will 
 show you the basics.
 
-# Connecting to ArcGIS
+## Connecting to ArcGIS
+
+The first step is to connect to ArcGIS. If you installed ArcGIS and 
+Python to the default locations, `arcpyr` should be able to find what
+it needs automatically. Otherwise, you might need to specify some 
+folder locations. If you want to connect to ArcGIS Pro, make sure to
+do `connect_ArcGIS(Pro = TRUE)`.
 
 ```{r}
 library(arcpyr)
 connect_ArcGIS()
 ```
+
+## Creating the arcpy environment object
+
+Once you have connected to ArcGIS, the next step is to create the arcpy
+environment object. This object will contain all the ArcGIS tools you
+want to access from R.
+
+```{r}
+arcpy = arcpy_env()
+```
+
+The code above creates an environment that contains all of the tools that are
+accessible from you ArcGIS installation. In addition, it also creates an 
+interface to the ArcGIS environment settings.
+
+```{r}
+ls(arcpy)         # list available tools
+ls(arcpy$env)     # list available environment settings
+```
+
+Don't need all the tools? There are two ways to create a partial 
+interface.
+
+### Method 1: Specify the tools and settings you want
+
+If you only need a few tools or environment settings, you can list them
+in the call to `arcpy_env`.
+
+```{r}
+arcpy = arcpy_env(
+  tool.list = c("Delete_managment", "Buffer_analysis"),
+  env.list = c("workspace", "scratchWorkspace")
+)
+arcpy$Delete_managment("path/to/layer")
+```
+
+Note that if you're using tools from an ArcGIS extension, you'll need
+to explicitly check out that extension via `checkout_extension()`.
+
+### Method 2: Create an empty environment, and then add toolboxes
+
+If you're going to be working extensively with only a few toolboxes,
+you can create an empty arcpy environment and then add the toolboxes
+individually.
+
+```{r}
+arcpy = arcpy_env(NULL) # Access all environment settings, but no tools
+attach_toolbox(arcpy, "management")  # attach the management toolbox
+attach_toolbox(arcpy, "statistics")  # attach the statistics toolbox
+```
+
+Adding toolboxes in this way will automatically check out any necessary 
+extensions. Note that accessing the tools this way works a bit 
+differently from the first method:
+
+```{r}
+arcpy$management$Delete("path/to/layer")
+```
+
+This may seem strange but it's completely analogous to the different 
+ways of accessing `arcpy` in Python:
+
+```{python}
+# method 1
+import arcpy
+arcpy.Delete_management('path/to/layer')
+
+# method 2
+import arcpy.management
+arcpy.management.Delete('path/to/layer')
+```
+
+### Method 3 (not recommended): attach the environment
+
+If you want to work with the `arcpy` tools directly in you environment,
+you can use `attach`:
+
+```{r}
+attach(arcpy_env("Delete_management", NULL))
+Delete_management('path/to/layer')
+env$workspace()
+```
+
+Which is analagous to 
+
+```{python}
+from arcpy import Delete_management
+```
+
+in Python. Note that this can clutter your environment and lead to some naming 
+conflicts, so I don't generally recommend it.
+
+## Need more?
+
+The `arcpyr` package is great for accessing ArcGIS toolboxes, but it 
+can't handle the object-oriented aspects of `arcpy` and Python. If you
+need things like raster calculations and attribute table reading and 
+modification, check out the `arcpyrextra` package. 
