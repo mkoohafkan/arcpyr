@@ -118,14 +118,20 @@ Delete_management('path/to/layer')
 env.workspace
 ```
 
+in Python. Note that this can clutter your environment and lead to some naming 
+conflicts, so I don't generally recommend it.
+
 ## Specify ArcGIS environment settings
 
 Setting up the ArcGIS environment with `arcpyr` is only slightly 
 different from Python. In `arcpyr`, environment settings are accessed 
-via function calls
+via function calls.
 
-in Python. Note that this can clutter your environment and lead to some naming 
-conflicts, so I don't generally recommend it.
+```{r}
+arcpy = arcpy_env()
+arcpy$env$workspace()                     # get workspace location
+arcpy$env$workspace("path/to/workspace")  # set workspace location
+```
 
 ## Need more?
 
