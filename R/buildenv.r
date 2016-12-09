@@ -1,3 +1,22 @@
+#' R interface to arcpy help
+#'
+#' Print the help documentation for an arcpy function.
+#'
+#' @param tool The tool to get help for.
+#'
+#' @examples
+#' \dontrun{
+#' arcpy = arcpy_env()
+#' tool_help(arcpy$Delete_managment)
+#' tool_help(arcpy$env)
+#' }
+#' @export
+tool_help = function(tool) {
+  field = tail(unlist(strsplit(deparse(substitute(tool)), split = "$",
+    fixed = TRUE)), -1)
+  PythonInR::pyHelp(paste(c("arcpy", field), collapse = "."))
+}
+
 #' R Interface to ArcPy
 #'
 #' An R interface for the ArcGIS Python module \code{arcpy}. Relies on 
@@ -311,3 +330,20 @@ list_toolboxes = function() {
   tools = list_tools()
   unique(gsub("^([a-zA-Z0-9]+\\_)", "", tools))
 }
+
+#' List ArcGIS Extensions
+#'
+#' List available ArcGIS extensions.
+#'
+#' @export 
+list_extensions = function() {
+  ext = c("3D", "DataReviewer", "DataInteroperability", "Airports",
+    "Aeronautical", "Bathymetry", "Nautical", "LocationReferencing",
+    "GeoStats", "Network", "Spatial", "Schematics", "Tracking",
+    "JTX", "ArcScan", "Business", "Defense", "Foundation", "Highways",
+    "StreetMap")
+  ext.list = lapply(ext, function(x)
+    PythonInR::pyGet(sprintf("arcpy.CheckExtension('%s')", x)))
+  ext[ext.list == "Available"]
+}
+
