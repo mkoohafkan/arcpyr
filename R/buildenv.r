@@ -346,4 +346,3 @@ list_extensions = function() {
     PythonInR::pyGet(sprintf("arcpy.CheckExtension('%s')", x)))
   ext[ext.list == "Available"]
 }
-
