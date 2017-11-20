@@ -11,5 +11,3 @@ arcpyr.rxproj
 arcpyr.sln
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^docs$
-^_pkgdown.yml$
