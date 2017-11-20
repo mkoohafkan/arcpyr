@@ -162,7 +162,7 @@ connect_ArcGIS = function(python_folder, Pro = FALSE, quietly = TRUE) {
     if (quietly)
       suppressPackageStartupMessages(
         PythonInR:::pyConnectWinDll(
-          dllName = "python34.dll",
+          dllName = list.files(python_folder, pattern = "python[0-9]+.dll"),
           pyArch = "64bit",
           majorVersion = 3,
           dllDir = python_folder,
@@ -170,7 +170,7 @@ connect_ArcGIS = function(python_folder, Pro = FALSE, quietly = TRUE) {
         ))
     else
       PythonInR:::pyConnectWinDll(
-        dllName = "python34.dll",
+        dllName = list.files(python_folder, pattern = "python[0-9]+.dll"),
         pyArch = "64bit",
         majorVersion = 3,
         dllDir = python_folder,
@@ -309,7 +309,7 @@ list_tools = function(toolbox = "*") {
 #' List Geoprocessing Environments
 #'
 #' List ArcGIS geoprocessing environment settings, i.e. elements of 
-#'   \code{arcpy.env}.
+#'   \code{arcpy.env}.c
 #'
 #' @param wc A wild card (regular expression) to filter the results.
 #' @return A list of geoprocessing environment names.
