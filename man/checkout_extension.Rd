@@ -12,4 +12,3 @@ checkout_extension(ext)
 \description{
 Checkout an ArcGIS extension.
 }
-

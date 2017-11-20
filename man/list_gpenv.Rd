@@ -16,4 +16,3 @@ A list of geoprocessing environment names.
 List ArcGIS geoprocessing environment settings, i.e. elements of 
   \code{arcpy.env}.
 }
-

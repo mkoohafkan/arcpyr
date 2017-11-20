@@ -9,3 +9,7 @@ README.md
 arcpyr.rproj
 arcpyr.rxproj
 arcpyr.sln
+^.*\.Rproj$
+^\.Rproj\.user$
+^docs$
+^_pkgdown.yml$

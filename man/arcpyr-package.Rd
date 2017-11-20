@@ -2,8 +2,8 @@
 % Please edit documentation in R/buildenv.r
 \docType{package}
 \name{arcpyr-package}
-\alias{arcpyr}
 \alias{arcpyr-package}
+\alias{arcpyr}
 \title{R Interface to ArcPy}
 \description{
 An R interface for the ArcGIS Python module \code{arcpy}. Relies on 
@@ -15,4 +15,3 @@ object. See the vignette to get started.
 \seealso{
 \code{\link{arcpy_env}}, \code{\link{connect_ArcGIS}}
 }
-

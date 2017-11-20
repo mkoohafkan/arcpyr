@@ -43,4 +43,3 @@ connect_ArcGIS("C:/Program Files/ArcGIS/Pro/bin/Python/envs/arcgispro-py3",
 \seealso{
 \code{\link{arcpy_env}}
 }
-

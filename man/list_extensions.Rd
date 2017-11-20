@@ -9,4 +9,3 @@ list_extensions()
 \description{
 List available ArcGIS extensions.
 }
-

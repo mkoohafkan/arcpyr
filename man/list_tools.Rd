@@ -15,4 +15,3 @@ A list of tools.
 \description{
 List ArcGIS tools available in arcpy.
 }
-
