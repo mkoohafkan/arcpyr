@@ -1,0 +1,26 @@
+template:
+  params:
+  bootswatch: cerulean
+
+reference:
+  - title: Interfacing with ArcGIS
+    contents:
+    - connect_ArcGIS()
+    - arcpy_env
+    - list_gpenv
+    - list_extensions
+    - list_toolboxes
+    - list_tools
+  - title: Extensions and Tool Boxes
+    contents:
+    - checkout_extension
+    - attach_toolbox
+    - attach_custom
+    - tool_help
+
+navbar:
+  left:
+  - text: Introduction
+    href: articles/introduction.html
+  - text: Reference
+    href: reference/index.html

@@ -1,12 +1,12 @@
-%\VignetteIndexEntry{Introduction}
-%\VignetteEngine{knitr}
-
-```{r include = FALSE}
-library(knitr)
-opts_chunk$set(eval = FALSE)
-```
-
-# Introduction to arcpyr
+---
+author: "Michael Koohafkan"
+title: "Introduction to arcpyr"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
 
 The `arcpyr` package provides a simple interface to `arcpy` for R 
 users. The interface should be straightforward to those who have
@@ -23,7 +23,7 @@ it needs automatically. Otherwise, you might need to specify some
 folder locations. If you want to connect to ArcGIS Pro, make sure to
 do `connect_ArcGIS(Pro = TRUE)`.
 
-```{r}
+```{r load-arcpyr, eval = FALSE}
 library(arcpyr)
 connect_ArcGIS()
 ```
@@ -34,7 +34,7 @@ Once you have connected to ArcGIS, the next step is to create the arcpy
 environment object. This object will contain all the ArcGIS tools you
 want to access from R.
 
-```{r}
+```{r make-env, eval = FALSE}
 arcpy = arcpy_env()
 ```
 
@@ -42,7 +42,7 @@ The code above creates an environment that contains all of the tools that are
 accessible from you ArcGIS installation. In addition, it also creates an 
 interface to the ArcGIS environment settings.
 
-```{r}
+```{r list-contents, eval = FALSE}
 ls(arcpy)         # list available tools
 ls(arcpy$env)     # list available environment settings
 ```
@@ -55,7 +55,7 @@ interface.
 If you only need a few tools or environment settings, you can list them
 in the call to `arcpy_env`.
 
-```{r}
+```{r load-tools, eval = FALSE}
 arcpy = arcpy_env(
   tool.list = c("Delete_managment", "Buffer_analysis"),
   env.list = c("workspace", "scratchWorkspace")
@@ -72,7 +72,7 @@ If you're going to be working extensively with only a few toolboxes,
 you can create an empty arcpy environment and then add the toolboxes
 individually.
 
-```{r}
+```{r load-tools-alt, eval = FALSE}
 arcpy = arcpy_env(NULL) # Access all environment settings, but no tools
 attach_toolbox(arcpy, "management")  # attach the management toolbox
 attach_toolbox(arcpy, "statistics")  # attach the statistics toolbox
@@ -82,14 +82,14 @@ Adding toolboxes in this way will automatically check out any necessary
 extensions. Note that accessing the tools this way works a bit 
 differently from the first method:
 
-```{r}
+```{r use-tool-alt, eval = FALSE}
 arcpy$management$Delete("path/to/layer")
 ```
 
 This may seem strange, but it's completely analogous to the different 
 ways of accessing `arcpy` tools in Python:
 
-```{python}
+```{python python-import, eval = FALSE}
 # method 1
 import arcpy
 arcpy.Delete_management('path/to/layer')
@@ -104,7 +104,7 @@ arcpy.management.Delete('path/to/layer')
 If you want to work with the `arcpy` tools directly in you environment,
 you can use `attach`:
 
-```{r}
+```{r load-tools-alt2, eval = FALSE}
 attach(arcpy_env())
 Delete_management('path/to/layer')
 env$workspace()
@@ -112,7 +112,7 @@ env$workspace()
 
 Which is analagous to 
 
-```{python}
+```{python import-alt, eval = FALSE}
 from arcpy import *
 Delete_management('path/to/layer')
 env.workspace
@@ -127,7 +127,7 @@ Setting up the ArcGIS environment with `arcpyr` is only slightly
 different from Python. In `arcpyr`, environment settings are accessed 
 via function calls.
 
-```{r}
+```{r arcpy-settings, eval = FALSE}
 arcpy = arcpy_env()
 arcpy$env$workspace()                     # get workspace location
 arcpy$env$workspace("path/to/workspace")  # set workspace location
